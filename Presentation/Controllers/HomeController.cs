@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Busy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,9 @@ namespace Presentation.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            Business b = new Business();
+            
+            return View(b.Populate());
         }
 
         public ActionResult About()
