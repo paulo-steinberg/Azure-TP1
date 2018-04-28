@@ -15,29 +15,33 @@ namespace Busy
         {
             try
             {
-                string caminho = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Infnet\AspNet\Azure\TP1\Data\DB.mdf;Integrated Security=True";
-                using (SqlConnection con = new SqlConnection(caminho))
+                if (lista.Count == 0)
                 {
-                    con.Open();
-                    string query = "Select * from Pessoas";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
+                    string caminho = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Infnet\AspNet\Azure\TP1\Data\DB.mdf;Integrated Security=True";
+                    using (SqlConnection con = new SqlConnection(caminho))
                     {
-                        Pessoa p = new Pessoa()
+                        con.Open();
+                        string query = "Select * from Pessoas";
+                        SqlCommand cmd = new SqlCommand(query, con);
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
                         {
-                            id = Convert.ToInt32(dr["Id"]),
-                            nome = Convert.ToString(dr["nome"]),
-                            sobrenome = Convert.ToString(dr["sobrenome"]),
-                            email = Convert.ToString(dr["email"]),
-                            data_nascimento = Convert.ToDateTime(dr["data_nascimento"])
+                            Pessoa p = new Pessoa()
+                            {
+                                id = Convert.ToInt32(dr["Id"]),
+                                nome = Convert.ToString(dr["nome"]),
+                                sobrenome = Convert.ToString(dr["sobrenome"]),
+                                email = Convert.ToString(dr["email"]),
+                                data_nascimento = Convert.ToDateTime(dr["data_nascimento"]),
+                                touched = false
+                            };
 
-                        };
-
-                        lista.Add(p);
+                            lista.Add(p);
+                        }
+                        return lista;
                     }
-                    return lista;
                 }
+                return lista;   
             }
             catch (Exception)
             {

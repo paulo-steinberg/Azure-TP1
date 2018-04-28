@@ -15,6 +15,15 @@ namespace Presentation.Controllers
             
             return View(b.Populate());
         }
+        
+
+
+        public ActionResult Index2()
+        {
+            Business b = new Business();
+            
+            return View(b.Populate());
+        }
 
         public ActionResult About()
         {

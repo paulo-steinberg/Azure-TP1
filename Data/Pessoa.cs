@@ -18,8 +18,8 @@ namespace Data
         public string sobrenome { get; set; }
         public string email { get; set; }
         public DateTime data_nascimento { get; set; }
-        
-        
+        public bool touched { get;  set; }
+
     }
 
 
